@@ -16,7 +16,6 @@ Element HouseGrammar::getHouse() const
 Element HouseGrammar::getElement(const Object* elementObj) const
 {
     const auto* terminalObj = dynamic_cast<const Terminal*>(elementObj);
-    
     if (terminalObj != nullptr) {
         return terminalObj->getStandardElement();
     }
@@ -25,7 +24,7 @@ Element HouseGrammar::getElement(const Object* elementObj) const
             return elementObj->getName() == r->getResultElement().getName();
         };
         auto it = std::find_if(rules_.begin(), rules_.end(), isElementRuleResult);
-        assert(("No such rule", it != rules_.end()));
+        assert(it != rules_.end() && "No such rule");
         Element ruleFirstElem = getElement(&(it->get()->getFirstArgument()));
         Element ruleSecondElem = getElement(&(it->get()->getSecondArgument()));
         
@@ -48,7 +47,7 @@ std::string HouseGrammar::isHouse(const std::vector<Element>& drawnElements)
         }
     }
 
-    return "Drawing is a house";
+    return "The picture shows a house";
 }
 
 std::string HouseGrammar::getGetTerminalName(const Line& line) const
