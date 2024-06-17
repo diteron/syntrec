@@ -38,6 +38,7 @@ QPalette MainWindow::createPalette(const QColor& backgroundColor)
 
 void MainWindow::drawGeneratedLines(std::vector<QLine>& lines)
 {
+    canvas_->clear();
     canvas_->drawLines(std::move(lines));
 }
 
@@ -68,8 +69,7 @@ void MainWindow::generateQLines()
         qLines.push_back(QLine(startPoint.getX(), startPoint.getY(),
                                endPoint.getX(), endPoint.getY()));
     }
-
-    canvas_->clear();
+    
     drawGeneratedLines(qLines);
 }
 
